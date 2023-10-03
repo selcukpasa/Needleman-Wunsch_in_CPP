@@ -6,7 +6,7 @@
 
 using namespace std;
 //Die Member-Variablen werden mit den uebergebenen Parameterwerten initialisiert.
-//Member-Variablen sind Teil der Klasse und können von allen Methoden und Funktionen innerhalb dieser Klasse verwendet werden.
+//Member-Variablen sind Teil der Klasse und kï¿½nnen von allen Methoden und Funktionen innerhalb dieser Klasse verwendet werden.
 //Hier sind die Membervariablen dist, match und mis
 NeedlemanImpl::NeedlemanImpl(int dis, int match, int mis) : dist(dis), match(match), mis(mis) {}
 
@@ -14,7 +14,7 @@ int NeedlemanImpl::calc_score(const string& a, const string& b, int i, int j) {
     //ueberprueft ob Char aus a mit Char aus b uebereinstimmt, wenn ja dann wird die Variable match ausgegeben, sonst mis.
     return (a[i] == b[j]) ? match : mis;
 }
-
+//Gibt das maximum der verschiedenen Faelle aus
 int NeedlemanImpl::maximum(int a, int b, int c) {
     return max(max(a, b), c);
 }
@@ -50,7 +50,7 @@ void NeedlemanImpl::needleman_calc(const string& seq1, const string& seq2) {
     string space;
 
 
-    while (i > 0 && j > 0) {
+    while (i > 0 || j > 0) {
         if (i > 0 && j > 0 && (matrix[i][j] == (matrix[i - 1][j - 1] + calc_score(seq1, seq2, i - 1, j - 1)))) {
             align1 = seq1[i - 1] + align1;
             align2 = seq2[j - 1] + align2;
@@ -68,7 +68,7 @@ void NeedlemanImpl::needleman_calc(const string& seq1, const string& seq2) {
             --j;
         }
     }
-
+    /*
     while (i > 0) {
         align1 = seq1[i - 1] + align1;
         align2 = '-' + align2;
@@ -80,7 +80,7 @@ void NeedlemanImpl::needleman_calc(const string& seq1, const string& seq2) {
         align2 = seq2[j - 1] + align2;
         --j;
     }
-
+    */
     print_alignment(align1, align2);
 }
 
